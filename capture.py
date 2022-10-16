@@ -15,7 +15,7 @@ while(True):
     if cv2.waitKey(1) & 0xFF == ord('y'):
         with open("config.yml") as f:
             data = load(f, Loader=SafeLoader)
-            outputName = f"images/owner{data['image_counter']}.png"
+            outputName = f"images/testimg{data['image_counter']}.png"
             print(outputName)
             data['image_counter'] += 1
             print(data)
