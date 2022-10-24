@@ -21,3 +21,8 @@ pip install -U numpy
 
 use the file capture.py
 to capture images from the camera.
+
+## Train
+
+use google colab to train the model. The file is in the folder train.
+In google. Download the finished dataset to the google colab

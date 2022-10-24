@@ -1,2 +1,6 @@
 .history
-testimg*
+testimg*3
+__pycache__
+.vscode
+runs/detect/exp*
+images/testing*
