@@ -28,12 +28,14 @@ doorpin = {
     "metal": 6,
     "glass": 5,
 }
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(19, GPIO.OUT)
 GPIO.setup(13, GPIO.OUT)
 GPIO.setup(6, GPIO.OUT)
 GPIO.setup(5, GPIO.OUT)
-GPIO.setwarnings(False)
+GPIO.setup(22, GPIO.IN)
+
 TEST = True
 TEST_MECH = True
 # TEST = True
@@ -44,7 +46,7 @@ while True:
     # if GPIO.input(16) == GPIO.HIGH:
     #if input("enter mf") == "":
     if True:
-        time.sleep(2)
+        #time.sleep(2)
         #img_path = capture.Capture_Image()
         #print('\033[0;33m' + img_path + '\033[0m')
         if TEST == True:
@@ -59,8 +61,10 @@ while True:
         if TEST_MECH:
             garbage_type = "plastic"
             garbage_type = input("what type of garbage?: ")
-        GPIO.output(doorpin[garbage_type], GPIO.HIGH)
-        print("door opening")
-        time.sleep(1)
-        GPIO.output(doorpin[garbage_type], GPIO.LOW)
+            if garbage_type in ["plastic","paper","glass","metal"]:
+                GPIO.output(doorpin[garbage_type], GPIO.HIGH)
+                print("door opening")
+                time.sleep(1)
+                GPIO.output(doorpin[garbage_type], GPIO.LOW)
+            
     time.sleep(2)
