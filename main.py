@@ -1,6 +1,4 @@
 
-
-
 """ 
 import capture 
 import detect 
@@ -12,8 +10,7 @@ loop checking the light gate
         detect(image , model, ) returns the type of garbage
         GPIO[garbage] = HIGH
         wait 5 seconds
-
- """
+"""
 
 print('\033[0;33m' + "importing libraries" + '\033[0m')
 # import RPi.GPIO as GPIO
@@ -28,6 +25,8 @@ doorpin = {
     "metal": 13,
     "glass": 15,
 }
+GATE_SENSOR = 16
+LED_LIGHT = 20
 
 TEST = False
 # TEST = True
@@ -35,8 +34,10 @@ TEST = False
 
 print('\033[92m' + "Garbage detection is currently running......" + '\033[0m')
 while True:
-    # if GPIO.input(16) == GPIO.HIGH:
-    if input("enter mf") == "":
+    # if GPIO.input(GATE_SENSOR) == GPIO.HIGH:
+    if input("enter to continue") == "": # for testing
+        print("light gate triggered")
+        # GPIO.output(LED_LIGHT, GPIO.HIGH)
         time.sleep(2)
         img_path = capture.Capture_Image()
         print('\033[0;33m' + img_path + '\033[0m')
