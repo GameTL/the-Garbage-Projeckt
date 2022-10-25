@@ -7,3 +7,4 @@ images/testing*
 DS_Store*
 .DS_Store
 images_*
+venv
