@@ -4,3 +4,4 @@ __pycache__
 .vscode
 runs/detect/exp*
 images/testing*
+venv
