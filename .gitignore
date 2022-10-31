@@ -3,6 +3,7 @@ testimg*3
 __pycache__
 .vscode
 runs/detect/exp*
+runs/detect/
 images/testing*
 DS_Store*
 .DS_Store

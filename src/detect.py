@@ -94,6 +94,7 @@ def run(
     # print(f"asd  {Path(project)}")
     # print(f"asd  {name}")
     save_dir = str(Path(project))
+    # 153
     # print(f"asd         {save_dir}")
 
     # (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
@@ -150,7 +151,7 @@ def run(
                 p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
 
             p = Path(p)  # to Path
-            save_path = str(save_dir + p.name)  # im.jpg
+            save_path = str(save_dir +"/"+ p.name)  # im.jpg
             txt_path = str(save_dir + 'labels' + p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # im.txt
             s += '%gx%g ' % im.shape[2:]  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
