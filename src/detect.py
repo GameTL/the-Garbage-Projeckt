@@ -86,9 +86,17 @@ def run(
     if is_url and is_file:
         source = check_file(source)  # download
 
-    # Directories
+    #! Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
-    (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
+    
+    # print(f"OG        {save_dir}")
+    # print(f"asd  {save_dir}")
+    # print(f"asd  {Path(project)}")
+    # print(f"asd  {name}")
+    save_dir = str(Path(project))
+    # print(f"asd         {save_dir}")
+
+    # (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
     # Load model
     device = select_device(device)
@@ -121,7 +129,8 @@ def run(
 
         # Inference
         with dt[1]:
-            visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
+            # visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
+            print()
             pred = model(im, augment=augment, visualize=visualize)
 
         # NMS
@@ -141,8 +150,8 @@ def run(
                 p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
 
             p = Path(p)  # to Path
-            save_path = str(save_dir / p.name)  # im.jpg
-            txt_path = str(save_dir / 'labels' / p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # im.txt
+            save_path = str(save_dir + p.name)  # im.jpg
+            txt_path = str(save_dir + 'labels' + p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # im.txt
             s += '%gx%g ' % im.shape[2:]  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             imc = im0.copy() if save_crop else im0  # for save_crop
@@ -213,6 +222,7 @@ def run(
     if save_txt or save_img:
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
+        print(f"mkjsdaflkfjs{save_dir}")
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
     
@@ -239,8 +249,8 @@ def parse_opt():
     parser.add_argument('--augment', action='store_true', help='augmented inference')
     parser.add_argument('--visualize', action='store_true', help='visualize features')
     parser.add_argument('--update', action='store_true', help='update all models')
-    parser.add_argument('--project', default=ROOT / 'runs/detect', help='save results to project/name')
-    parser.add_argument('--name', default='exp', help='save results to project/name')
+    parser.add_argument('--project', default=ROOT / 'runs', help='save results to project/name')
+    parser.add_argument('--name', default='detect', help='save results to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     parser.add_argument('--line-thickness', default=3, type=int, help='bounding box thickness (pixels)')
     parser.add_argument('--hide-labels', default=False, action='store_true', help='hide labels')
